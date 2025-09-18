@@ -1,0 +1,125 @@
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6 bg white rounded shadow">
+    <h2>Reactive Form Component</h2>
+
+    <form [formGroup]="myReactiveForm">
+      <div class="form-group">
+        <label for="username">Name</label>
+        <input
+          type="text"
+          placeholder="Enter username"
+          class="form-control"
+          formControlName="username"
+          id="username"
+          name="username"
+        />
+      </div>
+      <div *ngIf="myReactiveForm.touched && username?.touched">
+        <small class="text-danger" *ngIf="username?.invalid"
+          >Name is required</small
+        >
+      </div>
+      <br />
+      <div class="form-group">
+        <label for="number">Number</label>
+        <input
+          type="number"
+          placeholder="Enter number"
+          formControlName="phoneNumber"
+          class="form-control"
+          id="number"
+          name="number"
+        />
+      </div>
+      <div *ngIf="myReactiveForm.touched && phoneNumber?.touched">
+        <small class="text-danger" *ngIf="phoneNumber?.invalid"
+          >phoneNumber is required</small
+        >
+      </div>
+      <br />
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          formControlName="email"
+          id="email"
+          placeholder="Enter email"
+          name="email"
+        />
+      </div>
+      <div *ngIf="myReactiveForm.touched && email?.touched">
+        <small *ngIf="email?.errors?.['required']"> email is required</small>
+        <small
+          class="text-danger"
+          *ngIf="email?.invalid || email?.errors?.['email']"
+          >email is invalid</small
+        >
+      </div>
+      <br />
+
+      <div class="form-group">
+        <label for="course">Select Course</label>
+        <select
+          class="form-control"
+          name="course"
+          id="course"
+          formControlName="course"
+        >
+          <option value="angular">Angular</option>
+          <option value="react">React</option>
+          <option value="vue">Vue</option>
+          <option value="nodejs">Node.js</option>
+          <option value="python">Python</option>
+        </select>
+      </div>
+      <div *ngIf="course?.touched && myReactiveForm.touched">
+        <small class="text-danger" *ngIf="course?.invalid">
+          Select Course required</small
+        >
+      </div>
+      <br />
+      <div class="form-group">
+        <div class="custom-radio">
+          Select Your Gender
+          <br />
+          <input
+            type="radio"
+            name="gender"
+            id="male"
+            class="custom-radio-input"
+            formControlName="gender"
+            value="male"
+          />
+          <label for="male" class="custom-radio-label">male</label>
+          <br />
+          <input
+            type="radio"
+            name="gender"
+            id="female"
+            class="custom-radio-input"
+            formControlName="gender"
+            value="female"
+          />
+
+          <label for="female" class="custom-radio-label">Female</label>
+        </div>
+      </div>
+      <div *ngIf="gender?.touched && myReactiveForm.touched">
+        <small class="text-danger" *ngIf="gender?.invalid"
+          >Gender is required</small
+        >
+      </div>
+      <br />
+      <button
+        type="submit"
+        (click)="onSubmit(myReactiveForm.value)"
+        [disabled]="myReactiveForm.invalid"
+        class="btn btn-success"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
